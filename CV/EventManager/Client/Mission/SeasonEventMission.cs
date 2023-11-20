@@ -11,18 +11,18 @@ public class SeasonEventMission : UIForm
 {
     public const string OBJECTID = "SheetBlock_EventList";
 
-    [SerializeField] private GameObject seasonMissionInfo;              // ½ÃÁğ ¹Ì¼Ç »ó¼¼º¸±â ¿ÀºêÁ§Æ®
-    [SerializeField] private GameObject seasonMissionClearMark;           // ¹Ì¼Ç ¿ÃÅ¬¸®¾î ¿©ºÎ
-    [SerializeField] private UILabel seasonMissionName;                 // ½ÃÁğ ÀÌº¥Æ® ÀÌ¸§
-    [SerializeField] private UISprite seasonMissionSprite;              // ½ÃÁğ ÀÌº¥Æ®  ÀÌ¹ÌÁö
-    [SerializeField] private UIButton buttonMission;                    // ¹Ì¼Ç Å¬¸¯ ¹öÆ° ( »çÁø )
-    [SerializeField] private GameObject seasonDataObject;               // ¸Ş¸ğÁö
+    [SerializeField] private GameObject seasonMissionInfo;              // ì‹œì¦Œ ë¯¸ì…˜ ìƒì„¸ë³´ê¸° ì˜¤ë¸Œì íŠ¸
+    [SerializeField] private GameObject seasonMissionClearMark;           // ë¯¸ì…˜ ì˜¬í´ë¦¬ì–´ ì—¬ë¶€
+    [SerializeField] private UILabel seasonMissionName;                 // ì‹œì¦Œ ì´ë²¤íŠ¸ ì´ë¦„
+    [SerializeField] private UISprite seasonMissionSprite;              // ì‹œì¦Œ ì´ë²¤íŠ¸  ì´ë¯¸ì§€
+    [SerializeField] private UIButton buttonMission;                    // ë¯¸ì…˜ í´ë¦­ ë²„íŠ¼ ( ì‚¬ì§„ )
+    [SerializeField] private GameObject seasonDataObject;               // ë©”ëª¨ì§€
 
-    [SerializeField] private UILabel labelReward;                   // º¸»ó ¹öÆ° ¶óº§
-    [SerializeField] private UIButton buttonReward;                 // º¸»ó ¹öÆ°
-    [SerializeField] private GameObject receivedRewardEffect;               // ¸Ş¸ğÁö
+    [SerializeField] private UILabel labelReward;                   // ë³´ìƒ ë²„íŠ¼ ë¼ë²¨
+    [SerializeField] private UIButton buttonReward;                 // ë³´ìƒ ë²„íŠ¼
+    [SerializeField] private GameObject receivedRewardEffect;               // ë©”ëª¨ì§€
 
-    [SerializeField] private GameObject rewardNotice;                      // º¸»ó ·¹µå´å
+    [SerializeField] private GameObject rewardNotice;                      // ë³´ìƒ ë ˆë“œë‹·
 
     public SeasonEventMissionInfo seasonData;           //UI
     public NrChloeEventDataInfo seasonDataInfo;         //DATA
@@ -69,7 +69,7 @@ public class SeasonEventMission : UIForm
 
     private void OnClick_EventIcon()
     {
-        // Ä«µå Å¬¸¯ÇØ¼­ Á¾ÀÌ ¿­±â
+        // ì¹´ë“œ í´ë¦­í•´ì„œ ì¢…ì´ ì—´ê¸°
         seasonDataObject.SetActive(true);
         if (null != seasonDataInfo)
         {
@@ -79,12 +79,12 @@ public class SeasonEventMission : UIForm
     }
     void SetSeasonEventInfo(bool activeInfo,NrChloeEventDataInfo missionINfo)
     {
-        // Á¾ÀÌÈ°¼ºÈ­
+        // ì¢…ì´í™œì„±í™”
         seasonDataObject.SetActive(activeInfo);
 
         labelReward.text = NTextManager.Instance.GetText("UI_SEASONEVENT_REWARD_TEXT");
 
-        // ¸ñÇ¥°ª ´Ş¼º ¹Ì¼Ç Ã¼Å©
+        // ëª©í‘œê°’ ë‹¬ì„± ë¯¸ì…˜ ì²´í¬
         int missionCount = 0;
 
         if (missionINfo != null)
@@ -93,7 +93,7 @@ public class SeasonEventMission : UIForm
             {
                 if (missionINfo.SeasonEventMission_1.MissionTitle != null) 
                 { 
-                    // ¹Ì¼ÇÁ¤º¸ dicSeasionMission¿¡¼­ ÇöÀç Kind¿¡ ¸Â´Â À¯ÀúÀÇ °ªÀ» °¡Á®¿È
+                    // ë¯¸ì…˜ì •ë³´ dicSeasionMissionì—ì„œ í˜„ì¬ Kindì— ë§ëŠ” ìœ ì €ì˜ ê°’ì„ ê°€ì ¸ì˜´
                     var curValue = ChloeStoryEventManager.Instance.dicSeasonMission[missionINfo.SeasonEventMission_1_Kind];
                     var targetValue = missionINfo.SeasonEventMission_1.TargetValue;
 
@@ -104,12 +104,12 @@ public class SeasonEventMission : UIForm
                         curValue = targetValue;
                     }
 
-                    // ¹Ì¼Ç Å¸ÀÌÆ² ¼¼ÆÃ
+                    // ë¯¸ì…˜ íƒ€ì´í‹€ ì„¸íŒ…
                     seasonData.SetMissionLabel(
-                        1,                                                  // ÀÎµ¦½º
-                        missionINfo.SeasonEventMission_1.MissionTitle,      // Å¸ÀÌÆ²
-                        curValue,                                           // ÇöÀç ¹Ì¼Ç ¼öÇà°ª
-                        targetValue                                         // ¹Ì¼Ç ÃÖÁ¾ ¸ñÇ¥°ª
+                        1,                                                  // ì¸ë±ìŠ¤
+                        missionINfo.SeasonEventMission_1.MissionTitle,      // íƒ€ì´í‹€
+                        curValue,                                           // í˜„ì¬ ë¯¸ì…˜ ìˆ˜í–‰ê°’
+                        targetValue                                         // ë¯¸ì…˜ ìµœì¢… ëª©í‘œê°’
                         );
                 }
             }
@@ -128,10 +128,10 @@ public class SeasonEventMission : UIForm
                     }
 
                     seasonData.SetMissionLabel(
-                        2,                                                  // ÀÎµ¦½º
-                        missionINfo.SeasonEventMission_2.MissionTitle,      // Å¸ÀÌÆ²
-                        curValue,                                           // ÇöÀç ¹Ì¼Ç ¼öÇà°ª
-                        targetValue                                         // ¹Ì¼Ç ÃÖÁ¾ ¸ñÇ¥°ª
+                        2,                                                  // ì¸ë±ìŠ¤
+                        missionINfo.SeasonEventMission_2.MissionTitle,      // íƒ€ì´í‹€
+                        curValue,                                           // í˜„ì¬ ë¯¸ì…˜ ìˆ˜í–‰ê°’
+                        targetValue                                         // ë¯¸ì…˜ ìµœì¢… ëª©í‘œê°’
                         );
                 }
             }
@@ -150,18 +150,18 @@ public class SeasonEventMission : UIForm
                     }
 
                     seasonData.SetMissionLabel(
-                        3,                                                 // ÀÎµ¦½º
-                        missionINfo.SeasonEventMission_3.MissionTitle,     // Å¸ÀÌÆ²
-                        curValue,                                          // ÇöÀç ¹Ì¼Ç ¼öÇà°ª
-                        targetValue                                        // ¹Ì¼Ç ÃÖÁ¾ ¸ñÇ¥°ª
+                        3,                                                 // ì¸ë±ìŠ¤
+                        missionINfo.SeasonEventMission_3.MissionTitle,     // íƒ€ì´í‹€
+                        curValue,                                          // í˜„ì¬ ë¯¸ì…˜ ìˆ˜í–‰ê°’
+                        targetValue                                        // ë¯¸ì…˜ ìµœì¢… ëª©í‘œê°’
                         );
                 }
             }
 
             if (missionINfo.SeasonRewards.Count > 0)
             {
-                // NDTÅ×ÀÌºí¿¡¼­ Á¤º¸¸¦ ÀĞ¾î¿Í ¾ÆÀÌÅÛ °ªÀ» ¼¼ÆÃÇÑ´Ù
-                // 22.09.02 ±âÁØ 1°³ ¾ÆÀÌÅÛ¸¸ »ç¿ëÇÏ±â·Î ÇßÀ¸¹Ç·Î 0 »ç¿ë
+                // NDTí…Œì´ë¸”ì—ì„œ ì •ë³´ë¥¼ ì½ì–´ì™€ ì•„ì´í…œ ê°’ì„ ì„¸íŒ…í•œë‹¤
+                // 22.09.02 ê¸°ì¤€ 1ê°œ ì•„ì´í…œë§Œ ì‚¬ìš©í•˜ê¸°ë¡œ í–ˆìœ¼ë¯€ë¡œ 0 ì‚¬ìš©
                 seasonData.SetRewardItem(missionINfo.SeasonRewards[0].Kind, missionINfo.SeasonRewards[0].Quantity);
             }
 
@@ -193,7 +193,7 @@ public class SeasonEventMission : UIForm
     {
         if (ChloeStoryEventManager.Instance.dicRewardEvent.ContainsKey(SeasonKind))
         {
-            // dicRewardEvent¿¡ Á¸ÀçÇÑ´Ù : ÀÌ¹Ì °ü·Ã Ã³¸®°¡ µÈ ÀÌº¥Æ® 
+            // dicRewardEventì— ì¡´ì¬í•œë‹¤ : ì´ë¯¸ ê´€ë ¨ ì²˜ë¦¬ê°€ ëœ ì´ë²¤íŠ¸ 
             if (ChloeStoryEventManager.Instance.dicRewardEvent[SeasonKind] == (int)ChloeStoryEventManager.SeasonEventRewardState.ReceivedRewad)
             {
                 seasonData.RewardEffect();
@@ -201,7 +201,7 @@ public class SeasonEventMission : UIForm
         }
         else
         {
-            // dicRewardEvent¿¡ Á¸ÀçÇÏÁö¾Ê´Â´Ù : »õ·Î ¹ŞÀ» ¼ö ÀÖ°ÔµÈ ÀÌº¥Æ® 
+            // dicRewardEventì— ì¡´ì¬í•˜ì§€ì•ŠëŠ”ë‹¤ : ìƒˆë¡œ ë°›ì„ ìˆ˜ ìˆê²Œëœ ì´ë²¤íŠ¸ 
             ChloeStoryEventManager.Instance.dicRewardEvent.Add(SeasonKind, (int)ChloeStoryEventManager.SeasonEventRewardState.CanReceiveReward);
         }
 
@@ -209,14 +209,14 @@ public class SeasonEventMission : UIForm
 
     public void OnClick_RewardButtion()
     {
-        // ¼­¹ö¿¡ º¸»ó ¼ö·É °¡´É ¿©ºÎ È®ÀÎ
+        // ì„œë²„ì— ë³´ìƒ ìˆ˜ë ¹ ê°€ëŠ¥ ì—¬ë¶€ í™•ì¸
         if (seasonDataInfo != null)
         {
             if (seasonDataInfo.SeasonEventKind != 0)
             {
                 if (ChloeStoryEventManager.Instance.dicRewardEvent.ContainsKey(seasonDataInfo.SeasonEventKind)) 
                 { 
-                    // º¸»ó ¼ö·É Ã³¸®¸¦ À§ÇÑ ÆĞÅ¶ ¼­¹ö·Î ¼Û½Å
+                    // ë³´ìƒ ìˆ˜ë ¹ ì²˜ë¦¬ë¥¼ ìœ„í•œ íŒ¨í‚· ì„œë²„ë¡œ ì†¡ì‹ 
                     if (ChloeStoryEventManager.Instance.dicRewardEvent[seasonDataInfo.SeasonEventKind] == (int)ChloeStoryEventManager.SeasonEventRewardState.CanReceiveReward)
                     {
                         NFlatBufferBuilder.SendBytes<GS_SEASON_EVENT_REWARD_REQ>(ePACKET_ID.GS_SEASON_EVENT_REWARD_REQ, () => GS_SEASON_EVENT_REWARD_REQ.CreateGS_SEASON_EVENT_REWARD_REQ(FlatBuffers.NFlatBufferBuilder.FBB,
