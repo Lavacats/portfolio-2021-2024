@@ -1,0 +1,14 @@
+include "./BASE_INFO.fbs";
+
+namespace PROTOCOL.FLATBUFFERS;
+
+table GS_GUILD_BOOKMARK_CREATE_REQ
+{
+	Kind				: int; 			// EnumGuildBookmarkKIND
+	Name				: [ubyte];
+	PosX				: int;
+	PosY				: int;
+	TargetObjID			: INFO_OBJID;
+}
+
+root_type GS_GUILD_BOOKMARK_CREATE_REQ;
