@@ -1,0 +1,10 @@
+include "../common.fbs";
+namespace PROTOCOL.FLATBUFFERS;
+
+table GS_USE_EVENT_NFY
+{
+	EventPoint : int;
+	EventGroupKind : int;
+}
+
+root_type GS_USE_EVENT_NFY;
