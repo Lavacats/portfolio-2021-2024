@@ -10,35 +10,35 @@ using NLibCs;
 
 public class EventSeasonDlg : UIForm
 {
-    [SerializeField] private GameObject[] seasonEventMission;           // ½ÃÁğ ÀÌº¥Æ® ¹Ì¼Ç1 
+    [SerializeField] private GameObject[] seasonEventMission;           // ì‹œì¦Œ ì´ë²¤íŠ¸ ë¯¸ì…˜1 
 
-    [SerializeField] private GameObject seasonEventMission_ALL;         // ½ÃÁğ ÀÌº¥Æ® º¸»ó
+    [SerializeField] private GameObject seasonEventMission_ALL;         // ì‹œì¦Œ ì´ë²¤íŠ¸ ë³´ìƒ
 
-    [SerializeField] private UILabel Mission_All_Progress;              // ½ÃÁğ ÀÌº¥Æ® ÁøÇà·ü
-    [SerializeField] private UILabel seasonEventTime;                   // ½ÃÁğ ÀÌº¥Æ® ÁøÇà½Ã°£
-    [SerializeField] private UISprite Mission_All_Sprite;                 // ½ÃÁğ ÀÌº¥Æ® ÁøÇà·ü
-    [SerializeField] private GameObject Mission_All_Sprite_Reward;      // ½ÃÁğ ÀÌº¥Æ® ÁøÇà½Ã°£
+    [SerializeField] private UILabel Mission_All_Progress;              // ì‹œì¦Œ ì´ë²¤íŠ¸ ì§„í–‰ë¥ 
+    [SerializeField] private UILabel seasonEventTime;                   // ì‹œì¦Œ ì´ë²¤íŠ¸ ì§„í–‰ì‹œê°„
+    [SerializeField] private UISprite Mission_All_Sprite;                 // ì‹œì¦Œ ì´ë²¤íŠ¸ ì§„í–‰ë¥ 
+    [SerializeField] private GameObject Mission_All_Sprite_Reward;      // ì‹œì¦Œ ì´ë²¤íŠ¸ ì§„í–‰ì‹œê°„
 
     [SerializeField] private SeasonEventMission[] _ChloeStoryMission;
     [SerializeField] private UIButton buttonBackGround;
 
-    [SerializeField] private GameObject missionReward;               // º¸»ó
-    [SerializeField] private UISprite rewardImage;               // º¸»ó ÀÌ¹ÌÁö
-    [SerializeField] private UILabel rewardLabelVolume;               // º¸»ó °³¼ö
-    [SerializeField] private UILabel rewardLabelValue;               // º¸»ó °ª
-    [SerializeField] private GameObject rewardEffect;               // º¸»ó ÀÌÆåÆ®
+    [SerializeField] private GameObject missionReward;               // ë³´ìƒ
+    [SerializeField] private UISprite rewardImage;               // ë³´ìƒ ì´ë¯¸ì§€
+    [SerializeField] private UILabel rewardLabelVolume;               // ë³´ìƒ ê°œìˆ˜
+    [SerializeField] private UILabel rewardLabelValue;               // ë³´ìƒ ê°’
+    [SerializeField] private GameObject rewardEffect;               // ë³´ìƒ ì´í™íŠ¸
 
-    [SerializeField] private UILabel completeRewardProgress;               // º¸»ó °ª
-    [SerializeField] private UIButton buttonReward;                 //ÃÖÁ¾º¸»ó
-    [SerializeField] private GameObject effectRwardReceive;                 //ÃÖÁ¾º¸»ó
+    [SerializeField] private UILabel completeRewardProgress;               // ë³´ìƒ ê°’
+    [SerializeField] private UIButton buttonReward;                 //ìµœì¢…ë³´ìƒ
+    [SerializeField] private GameObject effectRwardReceive;                 //ìµœì¢…ë³´ìƒ
 
 
-    [SerializeField] private UIButton qustionMarkButton;        //µµ¿ò¸»
+    [SerializeField] private UIButton qustionMarkButton;        //ë„ì›€ë§
     public NrChloeEventDataInfo seasonDataInfo;         //DATA
     public override void Init()
     {
         base.Init();
-        var missionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;    // ÀÌº¥Æ® µ¥ÀÌÅÍ¸¸ ºÒ·¯¿Â ( °ªX , º¸»ó X )
+        var missionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;    // ì´ë²¤íŠ¸ ë°ì´í„°ë§Œ ë¶ˆëŸ¬ì˜¨ ( ê°’X , ë³´ìƒ X )
         Mission_All_Sprite.grayscale = true;
         if (missionData != null)
         {
@@ -55,7 +55,7 @@ public class EventSeasonDlg : UIForm
 
     public void SetSeasonEventUI(int curSeason, int curPeriod)
     {
-        var dicMissionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;    // ÀÌº¥Æ® µ¥ÀÌÅÍ¸¸ ºÒ·¯¿Â ( °ªX , º¸»ó X )
+        var dicMissionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;    // ì´ë²¤íŠ¸ ë°ì´í„°ë§Œ ë¶ˆëŸ¬ì˜¨ ( ê°’X , ë³´ìƒ X )
 
         foreach(var missionData in dicMissionData)
         {
@@ -73,7 +73,7 @@ public class EventSeasonDlg : UIForm
 
                     Mission_All_Sprite.spriteName = seasonDataInfo.MissionSprite;
                     
-                    // ÃÖÁ¾ º¸»ó ¹Ì¼Ç Á¤º¸
+                    // ìµœì¢… ë³´ìƒ ë¯¸ì…˜ ì •ë³´
                     SetRewardItem(missionData.Value.SeasonRewards[0].Kind, missionData.Value.SeasonRewards[0].Quantity);
                 }
             }
@@ -83,7 +83,7 @@ public class EventSeasonDlg : UIForm
     {
         RefreshCompleteReward();
    
-        var missionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;    // ÀÌº¥Æ® µ¥ÀÌÅÍ¸¸ ºÒ·¯¿Â ( °ªX , º¸»ó X )
+        var missionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;    // ì´ë²¤íŠ¸ ë°ì´í„°ë§Œ ë¶ˆëŸ¬ì˜¨ ( ê°’X , ë³´ìƒ X )
 
 
         int curCompleteMissioncount = 0;
@@ -92,7 +92,7 @@ public class EventSeasonDlg : UIForm
             for (int i = 0; i < _ChloeStoryMission.Length; i++)
             {
                 _ChloeStoryMission[i].RefreshSeasonEvent();
-                // dicReward¿¡ ±â·ÏµÈ °ªÁß 0º¸´Ù Å« °ªÀ» countÇÑ´Ù 
+                // dicRewardì— ê¸°ë¡ëœ ê°’ì¤‘ 0ë³´ë‹¤ í° ê°’ì„ countí•œë‹¤ 
                 if (_ChloeStoryMission[i].seasonDataInfo != null)
                 {
                     if (ChloeStoryEventManager.Instance.dicRewardEvent.ContainsKey(_ChloeStoryMission[i].seasonDataInfo.SeasonEventKind))
@@ -145,7 +145,7 @@ public class EventSeasonDlg : UIForm
             {
                 if (ChloeStoryEventManager.Instance.dicRewardEvent.ContainsKey(_ChloeStoryMission[i].seasonDataInfo.SeasonEventKind))
                 {
-                    // dicReward¿¡ ±â·ÏµÈ °ªÁß 0º¸´Ù Å« °ªÀ» countÇÑ´Ù 
+                    // dicRewardì— ê¸°ë¡ëœ ê°’ì¤‘ 0ë³´ë‹¤ í° ê°’ì„ countí•œë‹¤ 
                     if (ChloeStoryEventManager.Instance.dicRewardEvent[_ChloeStoryMission[i].seasonDataInfo.SeasonEventKind] > 0)
                         curCompleteMissioncount++;
                 }
@@ -177,9 +177,9 @@ public class EventSeasonDlg : UIForm
         {
             if (eventData.Value.SeasonEventKind == seasonKind)
             {
-                //TableÀÌ 0ºÎÅÍ 4±îÁö Ä«¿îÆ®ÇÔ
-                // 0 = ¸ŞÀÎ
-                // 1,2,3,4 =Ä«µå
+                //Tableì´ 0ë¶€í„° 4ê¹Œì§€ ì¹´ìš´íŠ¸í•¨
+                // 0 = ë©”ì¸
+                // 1,2,3,4 =ì¹´ë“œ
                 if (eventData.Value.missionCardNum == 0)
                 {
                     RefreshCompleteReward();
@@ -194,7 +194,7 @@ public class EventSeasonDlg : UIForm
 
     public void SetRewardItem(int itemKind , int itemCount)
     {
-        // ÇöÀç º¸»ó¾ÆÀÌÅÛÀº 1°³¸¸ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï ¼¼ÆÃ
+        // í˜„ì¬ ë³´ìƒì•„ì´í…œì€ 1ê°œë§Œ ì‚¬ìš©í•  ìˆ˜ ìˆë„ë¡ ì„¸íŒ…
 
         var missionData = TableChloeEventInfo.Instance.m_chloeEventDataInfoList;
 
@@ -249,13 +249,13 @@ public class EventSeasonDlg : UIForm
     }
     public void OnClick_RewardButtion()
     {
-        //ÃÑ º¸»ó NDT´Â Ç×»ó 0ºÎÅÍ ½ÃÀÛÇÑ´Ù 
-        // Àü/ ÈÄ±â ±âÁØ
-        // 0 ÃÑ º¸»ó ¼³¸í 
-        // 1 Ä«µå 1¹ø ¼³¸í
-        // 2 Ä«µå 2¹ø ¼³¸í
+        //ì´ ë³´ìƒ NDTëŠ” í•­ìƒ 0ë¶€í„° ì‹œì‘í•œë‹¤ 
+        // ì „/ í›„ê¸° ê¸°ì¤€
+        // 0 ì´ ë³´ìƒ ì„¤ëª… 
+        // 1 ì¹´ë“œ 1ë²ˆ ì„¤ëª…
+        // 2 ì¹´ë“œ 2ë²ˆ ì„¤ëª…
         // ....
-        // ±¸Á¶ÀÌ±â ¶§¹®¿¡ Àü±â¿¡¼­ ÈÄ±â·Î ³Ñ¾î°¡µµ 0°ªÀ» °Ë»öÇØº¸ ¹®Á¦°¡ ¾ø´Ù.
+        // êµ¬ì¡°ì´ê¸° ë•Œë¬¸ì— ì „ê¸°ì—ì„œ í›„ê¸°ë¡œ ë„˜ì–´ê°€ë„ 0ê°’ì„ ê²€ìƒ‰í•´ë³´ ë¬¸ì œê°€ ì—†ë‹¤.
         bool activeToolTip = true;
         if (seasonDataInfo.SeasonEventKind != 0)
          {
@@ -263,12 +263,12 @@ public class EventSeasonDlg : UIForm
             {
                 if (ChloeStoryEventManager.Instance.dicRewardEvent[seasonDataInfo.SeasonEventKind] == (int)ChloeStoryEventManager.SeasonEventRewardState.CanReceiveReward)
                 {
-                    // º¸»ó ¼ö·É Ã³¸®¸¦ À§ÇÑ ÆĞÅ¶ ¼­¹ö·Î ¼Û½Å
+                    // ë³´ìƒ ìˆ˜ë ¹ ì²˜ë¦¬ë¥¼ ìœ„í•œ íŒ¨í‚· ì„œë²„ë¡œ ì†¡ì‹ 
                     NFlatBufferBuilder.SendBytes<GS_SEASON_EVENT_REWARD_REQ>(ePACKET_ID.GS_SEASON_EVENT_REWARD_REQ, () => GS_SEASON_EVENT_REWARD_REQ.CreateGS_SEASON_EVENT_REWARD_REQ(FlatBuffers.NFlatBufferBuilder.FBB,
                       UserBase.User.UID,
                     (int)ChloeStoryEventManager.SeasonEventRewardState.ShowAllCompletedMissionReward,
                      seasonDataInfo.SeasonEventKind
-                     )); //  º¸»ó
+                     )); //  ë³´ìƒ
                     activeToolTip = false;
                 }
             }
