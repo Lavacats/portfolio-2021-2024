@@ -135,7 +135,7 @@ public class EventGemUseDlg : UIForm
     }
     public void ImageLoad(UITextureEx tex, string ImageName)
     {
-        //ÀÌ¹ÌÁö ¼ÂÆÃ
+        //Ã€ÃŒÂ¹ÃŒÃÃ¶ Â¼Ã‚Ã†Ãƒ
         if (null != tex)
         {
             EventManager.Instance.ImageLoad(EventManager.DAILYIMAGE_KEY, ImageName, (wwwdata, error) =>
