@@ -9,27 +9,27 @@ using Contents.User;
 
 public class SeasonEventMissionInfo : UIForm
 {
-    [SerializeField] private GameObject clearMark_1;                       // ½ÃÁğ ¹Ì¼Ç 1 Å¬¸®¾î UI Ç¥½Ã ¿©ºÎ
-    [SerializeField] private GameObject clearMark_2;                       // ½ÃÁğ ¹Ì¼Ç 2 Å¬¸®¾î UI Ç¥½Ã ¿©ºÎ
-    [SerializeField] private GameObject clearMark_3;                       // ½ÃÁğ ¹Ì¼Ç 3 Å¬¸®¾î UI Ç¥½Ã ¿©ºÎ
+    [SerializeField] private GameObject clearMark_1;                       // ì‹œì¦Œ ë¯¸ì…˜ 1 í´ë¦¬ì–´ UI í‘œì‹œ ì—¬ë¶€
+    [SerializeField] private GameObject clearMark_2;                       // ì‹œì¦Œ ë¯¸ì…˜ 2 í´ë¦¬ì–´ UI í‘œì‹œ ì—¬ë¶€
+    [SerializeField] private GameObject clearMark_3;                       // ì‹œì¦Œ ë¯¸ì…˜ 3 í´ë¦¬ì–´ UI í‘œì‹œ ì—¬ë¶€
 
 
-    [SerializeField] private UIPlaySound playSound_1;                         // º¸»ó ÀÌÆåÆ®
-    [SerializeField] private UIPlaySound playSound_2;                         // º¸»ó ÀÌÆåÆ®
-    [SerializeField] private UIPlaySound playSound_3;                         // º¸»ó ÀÌÆåÆ®
+    [SerializeField] private UIPlaySound playSound_1;                         // ë³´ìƒ ì´í™íŠ¸
+    [SerializeField] private UIPlaySound playSound_2;                         // ë³´ìƒ ì´í™íŠ¸
+    [SerializeField] private UIPlaySound playSound_3;                         // ë³´ìƒ ì´í™íŠ¸
 
-    [SerializeField] private UILabel seasonMission_1;                      // ½ÃÁğ ¹Ì¼Ç 1 ¶óº§
-    [SerializeField] private UILabel seasonMission_2;                      // ½ÃÁğ ¹Ì¼Ç 2 ¶óº§
-    [SerializeField] private UILabel seasonMission_3;                      // ½ÃÁğ ¹Ì¼Ç 3 ¶óº§
+    [SerializeField] private UILabel seasonMission_1;                      // ì‹œì¦Œ ë¯¸ì…˜ 1 ë¼ë²¨
+    [SerializeField] private UILabel seasonMission_2;                      // ì‹œì¦Œ ë¯¸ì…˜ 2 ë¼ë²¨
+    [SerializeField] private UILabel seasonMission_3;                      // ì‹œì¦Œ ë¯¸ì…˜ 3 ë¼ë²¨
 
-    [SerializeField] private UILabel seasonMission_1_Progress;             // ½ÃÁğ ¹Ì¼Ç 1 ¶óº§ ÁøÇàµµ
-    [SerializeField] private UILabel seasonMission_2_Progress;             // ½ÃÁğ ¹Ì¼Ç 2 ¶óº§ ÁøÇàµµ
-    [SerializeField] private UILabel seasonMission_3_Progress;             // ½ÃÁğ ¹Ì¼Ç 3 ¶óº§ ÁøÇàµµ
+    [SerializeField] private UILabel seasonMission_1_Progress;             // ì‹œì¦Œ ë¯¸ì…˜ 1 ë¼ë²¨ ì§„í–‰ë„
+    [SerializeField] private UILabel seasonMission_2_Progress;             // ì‹œì¦Œ ë¯¸ì…˜ 2 ë¼ë²¨ ì§„í–‰ë„
+    [SerializeField] private UILabel seasonMission_3_Progress;             // ì‹œì¦Œ ë¯¸ì…˜ 3 ë¼ë²¨ ì§„í–‰ë„
 
-    [SerializeField] private UISprite rewardImage;                         // º¸»ó ÀÌ¹ÌÁö
-    [SerializeField] private UILabel rewardLabelVolume;                    // º¸»ó °³¼ö
-    [SerializeField] private UILabel rewardLabelValue;                     // º¸»ó °ª
-    [SerializeField] private GameObject rewardEffect;                      // º¸»ó ÀÌÆåÆ®
+    [SerializeField] private UISprite rewardImage;                         // ë³´ìƒ ì´ë¯¸ì§€
+    [SerializeField] private UILabel rewardLabelVolume;                    // ë³´ìƒ ê°œìˆ˜
+    [SerializeField] private UILabel rewardLabelValue;                     // ë³´ìƒ ê°’
+    [SerializeField] private GameObject rewardEffect;                      // ë³´ìƒ ì´í™íŠ¸
     public void SetMissionLabel(int index, string MissionTextKey,int curProcess, int targetProcess)
     {
         if (index == 1) 
