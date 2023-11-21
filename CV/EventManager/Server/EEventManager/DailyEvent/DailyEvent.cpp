@@ -49,7 +49,7 @@ void CDailyEvent::InitDailyEventInfo()
 
 void CDailyEvent::LoadDailyEventInfo()
 {
-	// ÇÑ¹ø ÃÊ±âÈ­
+	// í•œë²ˆ ì´ˆê¸°í™”
 	InitDailyEventInfo();
 }
 
@@ -79,12 +79,12 @@ void CDailyEvent::OnEvent(INT64 userID, int conditionKind, int conditionValue, i
 	if (IS_NULL(infoArray))
 		return;
 
-	// ·¹º§¿¡ ¸Â´Â ¸ÅÀÏ ÀÌº¥Æ® Á¤º¸¸¦ °¡Á®¿É´Ï´Ù.
+	// ë ˆë²¨ì— ë§ëŠ” ë§¤ì¼ ì´ë²¤íŠ¸ ì •ë³´ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
 	auto levelMinMax = infoArray->GetEventMissionMinMaxLevel(pIsleInfo->Level);
 
 	auto isFind = false;
 
-	// ¸ÅÀÏ ÀÌº¥Æ® Á¤º¸°¡ 2°³ ÀÌ»óÀÏ ¼ö ÀÖ±â ¶§¹®¿¡, ÇØ´ç ¿äÀÏ¿¡ ¼ÓÇÑ ¸ÅÀÏ ÀÌº¥Æ®¸¦ ¼øÈ¸ ÇÕ´Ï´Ù.
+	// ë§¤ì¼ ì´ë²¤íŠ¸ ì •ë³´ê°€ 2ê°œ ì´ìƒì¼ ìˆ˜ ìˆê¸° ë•Œë¬¸ì—, í•´ë‹¹ ìš”ì¼ì— ì†í•œ ë§¤ì¼ ì´ë²¤íŠ¸ë¥¼ ìˆœíšŒ í•©ë‹ˆë‹¤.
 	auto iterS = infoArray->asMissionInfo.begin();
 	auto iterE = infoArray->asMissionInfo.end();
 	for (; iterS != iterE; ++iterS)
@@ -93,7 +93,7 @@ void CDailyEvent::OnEvent(INT64 userID, int conditionKind, int conditionValue, i
 		if (IS_NULL(pSubInfo))
 			continue;
 
-		// MinMax ·¹º§ÀÌ °°¾Æ¾ß °°Àº ¸ÅÀÏ ÀÌº¥Æ®·Î º¾´Ï´Ù.
+		// MinMax ë ˆë²¨ì´ ê°™ì•„ì•¼ ê°™ì€ ë§¤ì¼ ì´ë²¤íŠ¸ë¡œ ë´…ë‹ˆë‹¤.
 		if (levelMinMax.first == pSubInfo->LevelMin && levelMinMax.second == pSubInfo->LevelMax)
 		{
 			
@@ -122,11 +122,11 @@ void CDailyEvent::OnEvent(INT64 userID, int conditionKind, int conditionValue, i
 	{
 		INT32 prevAccumlateValue = CalculateAccumlatePoint(userID, conditionKind);
 
-		// ´©Àû ÀÌÀü °ª°ú ÀÌÈÄ °ªÀ» ºñ±³ÇØ º¯È­·®À» °è»êÇÕ´Ï´Ù.
+		// ëˆ„ì  ì´ì „ ê°’ê³¼ ì´í›„ ê°’ì„ ë¹„êµí•´ ë³€í™”ëŸ‰ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 		INT32 BeforeTotalPoint = CalculateEventPoint(userID, conditionKind, conditionValue, prevAccumlateValue);
 		INT32 AftertotalPoint = CalculateEventTotalPoint(userID, conditionKind, conditionValue, value);
 
-		// ÃÑ ´©Àû °ªÀ» °è»êÇÕ´Ï´Ù.
+		// ì´ ëˆ„ì  ê°’ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
 		INT64 totalvalue = prevAccumlateValue + value;
 
 		INT32 addpoint = (AftertotalPoint - BeforeTotalPoint);
@@ -158,7 +158,7 @@ void CDailyEvent::SendDailyPoint(INT64 userID, INT32 conditionKind, INT32 addPoi
 	if (nullptr == game_user)
 		return;
 
-	// ºñÁ¤»óÀûÀÎ Æ÷ÀÎÆ®°¡ µé¾î¿À´Â °æ¿ì°¡ ÀÖ¾î¼­ ¸ğ´ÏÅÍ¸µ Åø ·Î±× Ãß°¡
+	// ë¹„ì •ìƒì ì¸ í¬ì¸íŠ¸ê°€ ë“¤ì–´ì˜¤ëŠ” ê²½ìš°ê°€ ìˆì–´ì„œ ëª¨ë‹ˆí„°ë§ íˆ´ ë¡œê·¸ ì¶”ê°€
 	if (addPoint >= 1000000)
 	{
 		const STRING logMsg = UTIL::StringFormat(_T("OnEvent - Invaild daily event point! userid: [%I64d], conditionKind:[%d], addPoint:[%d]"), userID, conditionKind, addPoint);
@@ -183,13 +183,13 @@ void CDailyEvent::SendDailyPoint(INT64 userID, INT32 conditionKind, INT32 addPoi
 	std::pair<INT32, INT64> prevRank = std::make_pair(0, 0);
 	std::pair<INT32, INT64> curRank = std::make_pair(0, 0);
 
-	// ÁÖ°£ ÀÌº¥Æ® Æ÷ÀÎÆ®
+	// ì£¼ê°„ ì´ë²¤íŠ¸ í¬ì¸íŠ¸
 	curWeeklyDailyEventPoint = CRankMgr::Instance()->GetPoint(GAME::DAILY_EVENT_RANK, GAME::eDAILY_RANK_KIND::EVENT_RANK_WEEKLY, userID);
 	if (curWeeklyDailyEventPoint < 0)
 		curWeeklyDailyEventPoint = 0;
 	curWeeklyDailyEventPoint += addPoint;
 
-	// ÀÏ°£ ÀÌº¥Æ® Æ÷ÀÎÆ®
+	// ì¼ê°„ ì´ë²¤íŠ¸ í¬ì¸íŠ¸
 	curDailyEventPoint = CRankMgr::Instance()->GetPoint(GAME::DAILY_EVENT_RANK, checkEventType, userID);
 	if (curDailyEventPoint < 0)
 		curDailyEventPoint = 0;
@@ -206,13 +206,13 @@ void CDailyEvent::SendDailyPoint(INT64 userID, INT32 conditionKind, INT32 addPoi
 	if ((curRank.first >= 0) &&
 		(prevRank.first != curRank.first))
 	{
-		// ¿äÀÏ ÀÌº¥Æ® ·©Å· ·Î±×
+		// ìš”ì¼ ì´ë²¤íŠ¸ ë­í‚¹ ë¡œê·¸
 		GLOBAL::SendLog(game_user->UID(), 0, DB_LOG::REASON_DAILY_EVENT_RANKING_DAY, 0, 0,
 			{ GLOBAL::GS_INFO.SVID, game_user->UID(), game_user->GetGuildID(), checkEventType, checkEventType, curRank.first, addPoint, curRank.second, 0, 0 },
 			{ game_user->GetLordName(), CGuildManager::Instance()->GetGuildNameFromPersonID(game_user->UID()) });
 	}
 
-	// Æ÷ÀÎÆ® È¹µæ °ÔÀÓ·Î±×
+	// í¬ì¸íŠ¸ íšë“ ê²Œì„ë¡œê·¸
 	GLOBAL::SendLog(userID, 0, DB_LOG::REASON_DAILY_EVENT_POINT, 0, 0, { conditionKind, checkEventType, addPoint, curRank.second }, {});
 
 	INT64 eventStartTime = GLOBAL::GetDailyEventStartTime();
@@ -228,23 +228,23 @@ void CDailyEvent::SendDailyPoint(INT64 userID, INT32 conditionKind, INT32 addPoi
 	if ((curRank.first >= 0) &&
 		(prevRank.first != curRank.first))
 	{
-		// ÁÖ°£ ÀÌº¥Æ® ·©Å· ·Î±×
+		// ì£¼ê°„ ì´ë²¤íŠ¸ ë­í‚¹ ë¡œê·¸
 		GLOBAL::SendLog(game_user->UID(), 0, DB_LOG::REASON_DAILY_EVENT_RANKING_WEEK, 0, 0,
 			{ GLOBAL::GS_INFO.SVID, game_user->UID(), game_user->GetGuildID(), checkEventType, checkEventType, curRank.first, addPoint, curRank.second, 0, 0 },
 			{ game_user->GetLordName(), CGuildManager::Instance()->GetGuildNameFromPersonID(game_user->UID()) });
 	}
 
-	// GOT ÀÌº¥Æ® ·Î±×
+	// GOT ì´ë²¤íŠ¸ ë¡œê·¸
 	GLOBAL::SendLog(game_user->UID(), 0, DB_LOG::REASON_EVENT, 0, 0, { GLOBAL::GS_INFO.SVID, 1, eventStartTime, conditionKind, 1, prevRank.second, addPoint, curRank.second,
 	0, 0, 0, 0, 0, 0, 0, 0 }, { game_user->GetLordName(), CGuildManager::Instance()->GetGuildNameFromPersonID(game_user->UID()), GLOBAL::ConvertTimeToString(eventStartTime).c_str() });
 
-	//UTC°ª Ã¼Å©ÈÄ ¿äÀÏÀÌ º¯°æµµ¤Ó¾úÀ¸¸é ¸®ÇÁ·¹½¬.
+	//UTCê°’ ì²´í¬í›„ ìš”ì¼ì´ ë³€ê²½ë„ã…£ì—ˆìœ¼ë©´ ë¦¬í”„ë ˆì‰¬.
 	if (game_user->CheckDailyPointRefreshData() == false)
 	{
 		game_user->RefreshDailyEventDatas();
 	}
 
-	//·©Å· Æ÷ÀÎÆ® °ª¿¡¼­ °è»êµÈµÅ·Î ¼ÂÆÃ.
+	//ë­í‚¹ í¬ì¸íŠ¸ ê°’ì—ì„œ ê³„ì‚°ëœë¼ë¡œ ì…‹íŒ….
 	game_user->SetDailyEventPointUTCTime(UTCTime);
 	game_user->SetDailyEventPoint(curDailyEventPoint);
 	game_user->SetWeeklyDailyPoint(curWeeklyDailyEventPoint);
@@ -252,7 +252,7 @@ void CDailyEvent::SendDailyPoint(INT64 userID, INT32 conditionKind, INT32 addPoi
 
 
 
-	//ÆĞÅ¶ º¸³»±â
+	//íŒ¨í‚· ë³´ë‚´ê¸°
 	if (IS_ACTIVE_USER(game_user))
 	{
 		NEW_FLATBUFFER(GS_RANKING_DAILY_SET_ACK, pGSPacket);
@@ -330,13 +330,13 @@ INT32 CDailyEvent::CalculateEventPoint(INT64 userID, INT32 conditionKind, INT32 
 
 	switch (conditionKind)
 	{
-	case GAME::COLLECT_OIL:						// CV - ½Ä·®
+	case GAME::COLLECT_OIL:						// CV - ì‹ëŸ‰
 		addPoint = floor((value/100) * 5);
 		break;
 	case GAME::COLLECT_IRON:
 		addPoint = value;
 		break;
-	case GAME::COLLECT_SILVER:					// CV - Àº
+	case GAME::COLLECT_SILVER:					// CV - ì€
 		addPoint = floor((value/4) * 5);
 		break;
 	case GAME::KILL_MONSTER_UNIQUE_TANK:
@@ -373,17 +373,17 @@ INT32 CDailyEvent::CalculateEventPoint(INT64 userID, INT32 conditionKind, INT32 
 	case GAME::TANKENHANCE_BATTLEPOWER:
 		addPoint = value;
 		break;
-	case GAME::BUILD_UPGRADE_USE_OIL:		// °Ç¼³¿¡ »ç¿ëÇÑ ½Ä·® 1000´ç 1Æ÷ÀÎÆ®
+	case GAME::BUILD_UPGRADE_USE_OIL:		// ê±´ì„¤ì— ì‚¬ìš©í•œ ì‹ëŸ‰ 1000ë‹¹ 1í¬ì¸íŠ¸
 		addPoint = (value/1000);
 		break;
 	case GAME::BUILD_UPGRADE_USE_IRON:
 		addPoint = value;
 		break;
-	case GAME::BUILD_UPGRADE_USE_SILVER:	// °Ç¼³¿¡ »ç¿ëÇÑ Àº 40´ç 5Æ÷ÀÎÆ®
+	case GAME::BUILD_UPGRADE_USE_SILVER:	// ê±´ì„¤ì— ì‚¬ìš©í•œ ì€ 40ë‹¹ 5í¬ì¸íŠ¸
 		addPoint = ((value/40)*5);
 		break;
 	case GAME::BUILD_UPGRADE_USE_ITEM:
-	case GAME::RESEARCH_COMPLETE_USE_SILVER:	// ¿¬±¸¿¡ ¼Ò¸ğÇÑ Àº 8´Ş5Æ÷ÀÎÆ®
+	case GAME::RESEARCH_COMPLETE_USE_SILVER:	// ì—°êµ¬ì— ì†Œëª¨í•œ ì€ 8ë‹¬5í¬ì¸íŠ¸
 		addPoint = ((value / 8) * 5);
 		break;
 	case GAME::RESEARCH_COMPLETE_USE_ITEM:
@@ -499,13 +499,13 @@ void CDailyEvent::Send_DB_DAILY_EVENT_POINT_VALUE_SET_REQ(INT64 userID, INT32 co
 		return;
 	}
 
-	// ÃÑ°ı Æ÷ÀÎÆ®°¡ 0 ÀÌÇÏ¶ó¸é ¹«È¿
+	// ì´ê´„ í¬ì¸íŠ¸ê°€ 0 ì´í•˜ë¼ë©´ ë¬´íš¨
 	if (TotalValue <= 0)
 	{
 		return;
 	}
 
-	// ¼­¹ö µ¥ÀÌÅÍ ¼±Ã³¸®¸¦ ÇØÁİ´Ï´Ù.
+	// ì„œë²„ ë°ì´í„° ì„ ì²˜ë¦¬ë¥¼ í•´ì¤ë‹ˆë‹¤.
 	//pUser->AddDailyEventPointResource(conditionKind, GLOBAL::GetDailyEventWeekDay(GetDueDay_UTC(0)), TotalValue);
 
 	pUser->Send_DB_DAILY_EVENT_POINT_VALUE_INFO_SET_REQ(conditionKind, addPointvalue, prevTotalValue, TotalValue);
