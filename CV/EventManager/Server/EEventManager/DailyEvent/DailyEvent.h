@@ -1,6 +1,6 @@
 //DailyEvent.h
-//¸ÅÀÏ ÀÌº¥Æ®. 
-//ÁÖ°£ ´ÜÀ§·Î ¿Ï·áµÇ¸ç, ¸ÅÀÏ ¼¼ºÎ ÀÌº¥Æ®°¡ º¯°æµÈ´Ù.
+//ë§¤ì¼ ì´ë²¤íŠ¸. 
+//ì£¼ê°„ ë‹¨ìœ„ë¡œ ì™„ë£Œë˜ë©°, ë§¤ì¼ ì„¸ë¶€ ì´ë²¤íŠ¸ê°€ ë³€ê²½ëœë‹¤.
 #pragma once
 
 #include "IEvent.h"
