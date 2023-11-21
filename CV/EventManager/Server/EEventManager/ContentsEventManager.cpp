@@ -66,15 +66,15 @@ int ContentsEventManager::GetItemKind(int packageKind)
 //		contentsEventUser->killCounts.clear();
 //	}
 //
-//	// ÀÏ¹İº¸»ó È¹µæ Á¤º¸.
+//	// ì¼ë°˜ë³´ìƒ íšë“ ì •ë³´.
 //	for (flatbuffers::uoffset_t i = 0; i < normalRewards.size(); ++i)
 //		contentsEventUser->normalRewardKinds.emplace(normalRewards[i], normalRewards[i]);
 //
-//	// ÇÁ¸®¹Ì¾öº¸»ó È¹µæ Á¤º¸.
+//	// í”„ë¦¬ë¯¸ì—„ë³´ìƒ íšë“ ì •ë³´.
 //	for (flatbuffers::uoffset_t i = 0; i < premiumRewards.size(); ++i)
 //		contentsEventUser->premiumRewardKinds.emplace(premiumRewards[i], premiumRewards[i]);
 //
-//	// ¾ß¸¸ÀÎ Ã³Ä¡ Ä«¿îÆ®.
+//	// ì•¼ë§Œì¸ ì²˜ì¹˜ ì¹´ìš´íŠ¸.
 //	for (auto iter = killCounts.begin(); iter != killCounts.end(); ++iter)
 //	{
 //		auto contentsEventKind = iter->first;
@@ -119,7 +119,7 @@ ContentsEventUser* ContentsEventManager::UpdateChloeEventUser(INT64 userId, cons
 	//	contentsEventUser->killCounts.clear();
 	//}
 
-	// ÀÏ¹İº¸»ó È¹µæ Á¤º¸.
+	// ì¼ë°˜ë³´ìƒ íšë“ ì •ë³´.
 	for (flatbuffers::uoffset_t i = 0; i < chloeRewards.size(); ++i)
 		contentsEventUser->normalRewardKinds.emplace(chloeRewards[i], chloeRewards[i]);
 
@@ -227,7 +227,7 @@ SRESULT ContentsEventManager::LoadContentsEvent(NDataReader & data, INT32& i32Da
 		index++; // CORE_REWARD_DESC
 		index++; // EVENT_DESC
 
-		// ¾ß¸¸ÀÎ Ã³Ä¡ÇÏ±â Ä«ÀÎµå ¸ñ·Ï.
+		// ì•¼ë§Œì¸ ì²˜ì¹˜í•˜ê¸° ì¹´ì¸ë“œ ëª©ë¡.
 		//if (contentsEventReward->ConditionType == GAME::eCONTENTS_EVENT_CONDITION_TYPE::MONSTER_KILL)
 		//	MonsterKillKinds.push_back(contentsEventReward->ContentsEventKind);
 	}
@@ -281,7 +281,7 @@ void ContentsEventManager::Purchase(const INT64 userId, const int packageKind)
 //	auto game_user = CUserManager::Instance()->Seek(userId);
 //	if (game_user != nullptr)
 //	{	
-//		// ack¸¦ º¸³À´Ï´Ù.
+//		// ackë¥¼ ë³´ëƒ…ë‹ˆë‹¤.
 //		NEW_FLATBUFFER(GS_CONTENTS_EVENT_LIST_GET_ACK, pPacket);
 //		pPacket.Build([&](flatbuffers::FlatBufferBuilder& fbb)->auto
 //		{
@@ -405,7 +405,7 @@ void ContentsEventManager::SendMailContentsEventReward(int32_t serverId, INT64 u
 	}
 }
 
-// º¸»ó Á¤º¸ °»½Å ¹× º¸»óÁö±Ş.
+// ë³´ìƒ ì •ë³´ ê°±ì‹  ë° ë³´ìƒì§€ê¸‰.
 bool ContentsEventManager::SetReward(int32_t serverId, INT64 userId, int contentsEventKind, INT32 rewardFlag)
 {
 	const auto contentsEventUser = GetContentsEventUser(userId);
@@ -430,33 +430,33 @@ bool ContentsEventManager::IsRewardable(INT64 userId, int contentsEventKind, INT
 	return false;
 }
 
-// ¾ß¸¸ÀÎ Ã³Ä¡¼ö Áõ°¡.
+// ì•¼ë§Œì¸ ì²˜ì¹˜ìˆ˜ ì¦ê°€.
 //void ContentsEventManager::IncreaseMonsterKillCount(INT64 userId, int monsterLevel)
 //{
 //	const auto contentsEventUser = GetContentsEventUser(userId);
 //	if (contentsEventUser == nullptr)
 //		return;
 //
-//	// Ã³Ä¡¼ö Áõ°¡ °¡´ÉÇÑ°Í¸¸ Áõ°¡½ÃÅµ´Ï´Ù.
-//	// Áõ°¡½Ã ¸ñÇ¥¼öÄ¡º¸´Ù ³ÑÁö ¾Ê°Ô Ã¼Å©ÇÏ¿© Ã³¸®µË´Ï´Ù.
+//	// ì²˜ì¹˜ìˆ˜ ì¦ê°€ ê°€ëŠ¥í•œê²ƒë§Œ ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
+//	// ì¦ê°€ì‹œ ëª©í‘œìˆ˜ì¹˜ë³´ë‹¤ ë„˜ì§€ ì•Šê²Œ ì²´í¬í•˜ì—¬ ì²˜ë¦¬ë©ë‹ˆë‹¤.
 //	for (flatbuffers::uoffset_t i = 0; i < MonsterKillKinds.size(); ++i)
 //	{
 //		const auto contentsEventInfo = GetRewardInfo(MonsterKillKinds[i]);
 //		if (contentsEventInfo == nullptr)
 //			continue;
 //
-//		// º¸»óÀ» ¸ğµÎ ¿Ï·áÇßÀ¸¸é ½ºÅµ.
+//		// ë³´ìƒì„ ëª¨ë‘ ì™„ë£Œí–ˆìœ¼ë©´ ìŠ¤í‚µ.
 //		if (contentsEventUser->IsRewarded_All(contentsEventInfo->ContentsEventKind) == true)
 //			continue;
 //
-//		// ÁøÇàÁßÀÎ ÀÌº¥Æ®Áß ¸ñÇ¥ ¾ß¸¸ÀÎ ·¹º§À» Ã¼Å©ÇÏ¿© Å¸°Ù ·¹º§°ú °°Àº °æ¿ì¿¡¸¸ Ä«¿îÆÃ µË´Ï´Ù.
+//		// ì§„í–‰ì¤‘ì¸ ì´ë²¤íŠ¸ì¤‘ ëª©í‘œ ì•¼ë§Œì¸ ë ˆë²¨ì„ ì²´í¬í•˜ì—¬ íƒ€ê²Ÿ ë ˆë²¨ê³¼ ê°™ì€ ê²½ìš°ì—ë§Œ ì¹´ìš´íŒ… ë©ë‹ˆë‹¤.
 //		if (monsterLevel == contentsEventInfo->TargetValue_1)
 //		{
 //			auto bIncrease = contentsEventUser->IncreaseMonsterKillCount(contentsEventInfo);
 //
 //			if (bIncrease)
 //			{
-//				// DB °»½Å.
+//				// DB ê°±ì‹ .
 //				auto pUser = CUserManager::Instance()->FindByUID(userId);
 //				if (pUser != nullptr)
 //				{
@@ -471,7 +471,7 @@ bool ContentsEventManager::IsRewardable(INT64 userId, int contentsEventKind, INT
 //	}
 //}
 
-// {{ Å¬·ÎÀÌÀÇ ºñ¹Ğ ½ºÅä¸® ÀÌº¥Æ®.
+// {{ í´ë¡œì´ì˜ ë¹„ë°€ ìŠ¤í† ë¦¬ ì´ë²¤íŠ¸.
 bool ContentsEventManager::IsRewardable_ChloeStoryEvent(INT64 userId, int seasonKind)
 {
 	const auto contentsEventUser = GetContentsEventUser(userId);
@@ -493,14 +493,14 @@ bool ContentsEventManager::SetReward_ChloeStoryEvent(int32_t serverId, INT64 use
 
 	return false;
 }
-// }} Å¬·ÎÀÌÀÇ ºñ¹Ğ ½ºÅä¸® ÀÌº¥Æ®.
+// }} í´ë¡œì´ì˜ ë¹„ë°€ ìŠ¤í† ë¦¬ ì´ë²¤íŠ¸.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ContentsEventUser
 
-// º¸»ó Á¤º¸ °»½Å ¹× º¸»óÁö±Ş.
+// ë³´ìƒ ì •ë³´ ê°±ì‹  ë° ë³´ìƒì§€ê¸‰.
 // rewardFlag: 0(normal reward), 1(premium reward)
-// retrue value: ture(º¸»ó Áö±ŞµÊ), false(º¸»ó Áö±ŞµÇÁö ¾ÊÀ½)
+// retrue value: ture(ë³´ìƒ ì§€ê¸‰ë¨), false(ë³´ìƒ ì§€ê¸‰ë˜ì§€ ì•ŠìŒ)
 bool ContentsEventUser::SetReward(int32_t serverId, INT64 userId, ContentsEventReward* contentsEventReward, INT32 rewardFlag)
 {
 	if (IsRewardable(contentsEventReward, rewardFlag) != ContentsEventResult::RESULT_OK)
@@ -511,14 +511,14 @@ bool ContentsEventUser::SetReward(int32_t serverId, INT64 userId, ContentsEventR
 	else
 		premiumRewardKinds.emplace(contentsEventReward->ContentsEventKind, contentsEventReward->ContentsEventKind);
 
-	// º¸»ó Áö±Ş.
+	// ë³´ìƒ ì§€ê¸‰.
 	CUser* user = CUserManager::Instance()->FindByUID(userId);
 	if (user == nullptr)
 		return false;
 
 	if (contentsEventReward->ConditionType == GAME::eCONTENTS_EVENT_CONDITION_TYPE::VEILED_LADY)
 	{
-		// ÀÎ¹êÅä¸®·Î Áö±Ş.
+		// ì¸ë°´í† ë¦¬ë¡œ ì§€ê¸‰.
 		if (rewardFlag == 0)
 		{
 			for (const auto reward : contentsEventReward->NormalRewardItems)
@@ -533,7 +533,7 @@ bool ContentsEventUser::SetReward(int32_t serverId, INT64 userId, ContentsEventR
 	}
 	else
 	{
-		// ¸ŞÀÏ·Î Áö±Ş.
+		// ë©”ì¼ë¡œ ì§€ê¸‰.
 		ContentsEventManager::Instance()->SendMailContentsEventReward(serverId, userId, contentsEventReward->ContentsEventKind, rewardFlag);
 	}
 
@@ -543,21 +543,21 @@ bool ContentsEventUser::SetReward(int32_t serverId, INT64 userId, ContentsEventR
 // rewardFlag: 0(normal reward), 1(premium reward)
 ContentsEventResult ContentsEventUser::IsRewardable(ContentsEventReward* contentsEventReward, INT32 rewardFlag)
 {
-	//ÄÁÅÙÃ÷ ¿Â¿ÀÇÁ
+	//ì»¨í…ì¸  ì˜¨ì˜¤í”„
 	//if (false == GLOBAL::IsContentStateOn(GLOBAL::eCONTENT_STATE_ID::CONTENT_GROWTH_FUND))
 	//	return ContentsEventResult::RESULT_CONTENTS_OFF;
 
 	if (nullptr == contentsEventReward)
 		return ContentsEventResult::RESULT_INVALID_REWARD;
 
-	//º¸»ó Áßº¹ Ã¼Å©
+	//ë³´ìƒ ì¤‘ë³µ ì²´í¬
 	if (rewardFlag == 0)
 	{
 		auto find_normalReward = normalRewardKinds.find(contentsEventReward->ContentsEventKind);
 		if (find_normalReward != normalRewardKinds.end())
 			return ContentsEventResult::RESULT_ALREADY_REWARD;
 
-		//º¸»ó ³»¿ª Ã¼Å©
+		//ë³´ìƒ ë‚´ì—­ ì²´í¬
 		if (0 == contentsEventReward->NormalRewardItems.size())
 			return ContentsEventResult::RESULT_INVALID_REWARD;
 	}
@@ -567,7 +567,7 @@ ContentsEventResult ContentsEventUser::IsRewardable(ContentsEventReward* content
 		if (find_premiumReward != premiumRewardKinds.end())
 			return ContentsEventResult::RESULT_ALREADY_REWARD;
 
-		//º¸»ó ³»¿ª Ã¼Å©
+		//ë³´ìƒ ë‚´ì—­ ì²´í¬
 		if (0 == contentsEventReward->PremiumRewardItems.size())
 			return ContentsEventResult::RESULT_INVALID_REWARD;
 	}
@@ -597,15 +597,15 @@ ContentsEventResult ContentsEventUser::IsPurchasable(int packageKind)
 	return ContentsEventResult::RESULT_OK;
 }
 
-// ÄÁÅÙÃ÷ ÀÌ¹êÆ®¸¦ ¿Ï·áÇÏ¿´´Â°¡?
+// ì»¨í…ì¸  ì´ë°´íŠ¸ë¥¼ ì™„ë£Œí•˜ì˜€ëŠ”ê°€?
 ContentsEventResult ContentsEventUser::IsContentsEventCompleted(ContentsEventReward* contentsEventReward)
 {
 	auto user = CUserManager::Instance()->GetByUID(UserId);
 	if (IS_NULL(user))
 		return ContentsEventResult::RESULT_NULL_USER;
 
-	// ÄÁÅÙÃ÷ ÀÌ¹êÆ® ÄÁµğ¼Ç Ã¼Å©.
-	// 1:°ÉÀÛº¸À¯ÇÏ±â, 2:°Ç¹°¾÷±×·¡ÀÌµå, 3:¾ß¸¸ÀÎÃ³Ä¡ÇÏ±â.
+	// ì»¨í…ì¸  ì´ë°´íŠ¸ ì»¨ë””ì…˜ ì²´í¬.
+	// 1:ê±¸ì‘ë³´ìœ í•˜ê¸°, 2:ê±´ë¬¼ì—…ê·¸ë˜ì´ë“œ, 3:ì•¼ë§Œì¸ì²˜ì¹˜í•˜ê¸°.
 	if (contentsEventReward->ConditionType == GAME::eCONTENTS_EVENT_CONDITION_TYPE::MASTERPIECE_CREATE)
 	{
 		auto targetCount = contentsEventReward->TargetValue_1;
@@ -640,14 +640,14 @@ ContentsEventResult ContentsEventUser::IsContentsEventCompleted(ContentsEventRew
 	{
 		if (1 == contentsEventReward->TargetValue_1)
 		{
-			// °ÉÀÛ Ã¼Å©.
+			// ê±¸ì‘ ì²´í¬.
 			auto masterpieceKind = contentsEventReward->TargetValue_2;
 			if (nullptr != user->Territory().GetHaveMasterpiece(masterpieceKind))
 				return ContentsEventResult::RESULT_OK;
 		}
 		else if (2 == contentsEventReward->TargetValue_1)
 		{
-			// ¿¬±¸ Ã¼Å©.
+			// ì—°êµ¬ ì²´í¬.
 			auto researchKind = contentsEventReward->TargetValue_2;
 			if (true == user->GetLaboratory()->ContainsSkill(researchKind, 1))
 				return ContentsEventResult::RESULT_OK;
@@ -665,7 +665,7 @@ ContentsEventResult ContentsEventUser::IsContentsEventCompleted(ContentsEventRew
 	return ContentsEventResult::RESULT_EVENT_FAILED;
 }
 
-// ¾ß¸¸ÀÎ Ã³Ä¡¼ö °»½Å.
+// ì•¼ë§Œì¸ ì²˜ì¹˜ìˆ˜ ê°±ì‹ .
 //bool ContentsEventUser::IncreaseMonsterKillCount(ContentsEventReward* contentsEventReward)
 //{
 //	auto increaseCount = GetMonsterkillCount(contentsEventReward->ContentsEventKind) + 1;
@@ -698,7 +698,7 @@ ContentsEventResult ContentsEventUser::IsContentsEventCompleted(ContentsEventRew
 //		killCounts.emplace(contentsEventKind, monsterKillCount);
 //}
 
-// º¸»ó È¹µæ À¯/¹«.
+// ë³´ìƒ íšë“ ìœ /ë¬´.
 bool ContentsEventUser::IsRewarded_Normal(int contentsEventKind)
 {
 	auto find = normalRewardKinds.find(contentsEventKind);
@@ -707,7 +707,7 @@ bool ContentsEventUser::IsRewarded_Normal(int contentsEventKind)
 	return false;
 }
 
-// º¸»ó È¹µæ À¯/¹«.
+// ë³´ìƒ íšë“ ìœ /ë¬´.
 bool ContentsEventUser::IsRewarded_Premium(int contentsEventKind)
 {
 	auto find = premiumRewardKinds.find(contentsEventKind);
@@ -716,14 +716,14 @@ bool ContentsEventUser::IsRewarded_Premium(int contentsEventKind)
 	return false;
 }
 
-// º¸»ó È¹µæ À¯/¹«.
+// ë³´ìƒ íšë“ ìœ /ë¬´.
 bool ContentsEventUser::IsRewarded_All(int contentsEventKind)
 {
 	return IsRewarded_Normal(contentsEventKind) && IsRewarded_Premium(contentsEventKind);
 }
 
-// {{ Å¬·ÎÀÌÀÇ ºñ¹Ğ ½ºÅä¸® ÀÌº¥Æ®.
-// Å¬·ÎÀÌÀÇ ºñ¹Ğ ½ºÅä¸® ÀÌº¥Æ®¸¦ ¿Ï·áÇÏ¿´´Â°¡?
+// {{ í´ë¡œì´ì˜ ë¹„ë°€ ìŠ¤í† ë¦¬ ì´ë²¤íŠ¸.
+// í´ë¡œì´ì˜ ë¹„ë°€ ìŠ¤í† ë¦¬ ì´ë²¤íŠ¸ë¥¼ ì™„ë£Œí•˜ì˜€ëŠ”ê°€?
 ContentsEventResult ContentsEventUser::IsChleoStoryEventCompleted(int seasonKind)
 {
 	auto user = CUserManager::Instance()->GetByUID(UserId);
@@ -747,14 +747,14 @@ ContentsEventResult ContentsEventUser::IsChleoStoryEventCompleted(int seasonKind
 // 
 // // 		if (1 == info->MissionTargetValue_1)
 // // 		{
-// // 			// °ÉÀÛ Ã¼Å©.
+// // 			// ê±¸ì‘ ì²´í¬.
 // // 			auto masterpieceKind = info->MissionTargetValue_2;
 // // 			if (nullptr == user->Territory().GetHaveMasterpiece(masterpieceKind))
 // // 				return ContentsEventResult::RESULT_EVENT_FAILED;
 // // 		}
 // // 		else if (2 == info->MissionTargetValue_1)
 // // 		{
-// // 			// ¿¬±¸ Ã¼Å©.
+// // 			// ì—°êµ¬ ì²´í¬.
 // // 			auto researchKind = info->MissionTargetValue_2;
 // // 			if (false == user->GetLaboratory()->ContainsSkill(researchKind, 1))
 // // 				return ContentsEventResult::RESULT_EVENT_FAILED;
@@ -770,11 +770,11 @@ ContentsEventResult ContentsEventUser::IsChleoStoryEventCompleted(int seasonKind
 // rewardFlag: 0(normal reward), 1(premium reward)
 ContentsEventResult ContentsEventUser::IsRewardable_ChloeStoryEvent(int seasonKind)
 {
-	//ÄÁÅÙÃ÷ ¿Â¿ÀÇÁ
+	//ì»¨í…ì¸  ì˜¨ì˜¤í”„
 	//if (false == GLOBAL::IsContentStateOn(GLOBAL::eCONTENT_STATE_ID::CONTENT_GROWTH_FUND))
 	//	return ContentsEventResult::RESULT_CONTENTS_OFF;
 
-	//º¸»ó Áßº¹ Ã¼Å©
+	//ë³´ìƒ ì¤‘ë³µ ì²´í¬
 	auto find_normalReward = normalRewardKinds.find(seasonKind);
 	if (find_normalReward != normalRewardKinds.end())
 		return ContentsEventResult::RESULT_ALREADY_REWARD;
@@ -787,4 +787,4 @@ bool ContentsEventUser::SetReward_ChloeStoryEvent(int32_t serverId, INT64 userId
 
 	return false;
 }
-// }} Å¬·ÎÀÌÀÇ ºñ¹Ğ ½ºÅä¸® ÀÌº¥Æ®.
+// }} í´ë¡œì´ì˜ ë¹„ë°€ ìŠ¤í† ë¦¬ ì´ë²¤íŠ¸.
