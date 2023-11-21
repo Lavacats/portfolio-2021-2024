@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using NETWORK.GAME;
-using UnityEngine;
-
 public class GUI_BookmarkModifiedPopup : PopupDisplay
 {
     public class PARAM : IGUIOnOpenedParam, IGUIOnRefreshedParam
