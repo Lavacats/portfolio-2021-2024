@@ -1,0 +1,8 @@
+include "../common.fbs";
+namespace PROTOCOL.FLATBUFFERS;
+
+table GS_SEASON_EVENT_REWARD_ACK
+{
+	Reward : [SEASON_REWARD_INFO];
+}
+root_type GS_SEASON_EVENT_REWARD_ACK;

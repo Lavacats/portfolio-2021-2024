@@ -1,9 +1,0 @@
-include "../common.fbs";
-namespace PROTOCOL.FLATBUFFERS;
-
-table GS_USE_EVENT_INFO_ACK
-{
-	Result   	: int;
-	EventList 	: [USE_EVENT_INFO];
-}
-root_type GS_USE_EVENT_INFO_ACK;

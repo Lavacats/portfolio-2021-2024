@@ -1,0 +1,9 @@
+include "../common.fbs";
+namespace PROTOCOL.FLATBUFFERS;
+
+table GS_USE_EVENT_INFO_REQ
+{
+	UID		:int;
+	EventGroupKind : int;
+}
+root_type GS_USE_EVENT_INFO_REQ;

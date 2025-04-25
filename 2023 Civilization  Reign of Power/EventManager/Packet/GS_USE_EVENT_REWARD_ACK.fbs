@@ -1,0 +1,11 @@
+include "../common.fbs";
+namespace PROTOCOL.FLATBUFFERS;
+
+table GS_USE_EVENT_REWARD_ACK
+{
+	Result   						: int;
+	EventKind 						: int;
+	PointGrade 						: int;
+	EventGroupKind 					: int;
+}
+root_type GS_USE_EVENT_REWARD_ACK;
