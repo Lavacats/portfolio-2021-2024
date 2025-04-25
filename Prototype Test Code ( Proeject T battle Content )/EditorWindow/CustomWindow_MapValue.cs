@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+// 맵에서 사용할 툴 관련 처리 스크립트
 public class CustomWindow_MapValue 
 {
     private SerializedObject serializedObject;  
@@ -22,6 +23,8 @@ public class CustomWindow_MapValue
     }
     public void OnGui_MapValue()
     {
+        // GUI 를 통해 맵 관련 정보를 출력합니다
+
         serializedObject.Update();
 
         IsShowSettings = EditorGUILayout.Foldout(IsShowSettings, "Map_Settings");
@@ -42,6 +45,8 @@ public class CustomWindow_MapValue
             IsShow_SetShow = EditorGUILayout.Foldout(IsShow_SetShow, "    Set_ShowOption");
             if (IsShow_SetShow)
             { 
+                // 맵 관련 Show Option을 세팅 합니다.
+
                 mapData.isShowTile = EditorGUILayout.Toggle(" isShowTile", mapData.isShowTile);
                 mapData.isShowCell = EditorGUILayout.Toggle(" isShowCell", mapData.isShowCell);
                 mapData.isShowPixel = EditorGUILayout.Toggle(" isShowPixel", mapData.isShowPixel);

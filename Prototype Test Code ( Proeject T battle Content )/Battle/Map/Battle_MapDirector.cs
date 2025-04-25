@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 맵은 여러개의 타일로 이루어져있다.
-
+/// <summary>
+/// 맵에 배치할 Tile,Cell,Pixel정보를 생성하는 스크립트
+/// EditorWindow를 통해 확장한 툴을 통해 Show 옵션을 선택한경우
+/// 실제로 게임에서 Tile, Cell, Pixel을 확인할 수 있는 Test_BattleMap_Show 를 통해 Plane을 배치해 확인할 수 있습니다.
+/// </summary>
 
 public class Battle_MapDirector : MonoBehaviour
 {
-    [SerializeField] MeshCollider MeshCollider_Obj;
-    [SerializeField] GameObject TileList;
+    [SerializeField] MeshCollider MeshCollider_Obj;         // Map의 바닥 MeshCollider
+    [SerializeField] GameObject TileList;                   // Test용 보여주기 Tile,Cell,Pixel을 생성할 때 저장할 GameObject
 
+    // Test용 Show Object를 관리하는 스크립트
     public Test_BattleMap_ShowTile ShowTIleController = new Test_BattleMap_ShowTile();
+
+    // 실제 계산에서 사용되는 클래스를 저장하는 스크립트
     public Dictionary<Vector2, Battle_MapTile> Dic_MapTile = new Dictionary<Vector2, Battle_MapTile>();
 
     private void Start()
@@ -47,6 +53,9 @@ public class Battle_MapDirector : MonoBehaviour
             }
         }
     }
+
+    #region Get Map Data
+    // 포지션에 따른 Tile 정보
     public Battle_MapTile GetTile(Vector3 pos)
     {
         Battle_MapTile result = null;
@@ -68,6 +77,8 @@ public class Battle_MapDirector : MonoBehaviour
         }
         return result;
     }
+
+    // 포지션에 따른 Cell 정보
     public Battle_MapCell GetCell(Vector3 pos)
     {
         Battle_MapCell result = null;
@@ -79,6 +90,8 @@ public class Battle_MapDirector : MonoBehaviour
         }
         return result;
     }
+
+    // 포지션에 따른 Pixel정보
     public Battle_MapPixel GetPixel(Vector3 pos)
     {
         Battle_MapPixel result = null;
@@ -94,6 +107,8 @@ public class Battle_MapDirector : MonoBehaviour
         }
         return result;
     }
+
+    // 맵 모든 픽셀 정보
     public SerializableDictionary<Vector2, Battle_MapPixel> Get_ALL_BattleMapPixel()
     {
         SerializableDictionary<Vector2, Battle_MapPixel> result = new SerializableDictionary<Vector2, Battle_MapPixel>();
@@ -106,5 +121,5 @@ public class Battle_MapDirector : MonoBehaviour
         }
         return result;
     }
-
+    #endregion
 }

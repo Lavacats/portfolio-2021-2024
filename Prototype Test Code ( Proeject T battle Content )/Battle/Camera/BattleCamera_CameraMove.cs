@@ -5,7 +5,7 @@ using UnityEngine;
 public class BattleCamera_CameraMove 
 {
     private float moveSpeed = 10f; // 카메라 이동 속도
-    private float boundaryMargin = 10f; // 화면 끝에서 카메라가 이동하기 시작할 마진
+    private float boundaryMargin = 10f; // 추후 맵 경계에 따른 제한 처리 추가 예정
     public void Update(Camera mainCamera)
     {
         // 방향키 입력을 받아 카메라를 이동

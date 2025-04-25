@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+
+/// <summary>
+/// 싱글톤으로 선언한 MapData 매니저 클래스
+/// Scriptable에서 로드한 데이터를 들고있으며, 관련 계산이 필요한 구간에서 정보를 제공
+/// Map 생성과 데이터 비교시에 사용됩니다.
+/// </summary>
 public class Battle_MapDataManager : SingleTon<Battle_MapDataManager>
 {
     public Camera MapCamaera = null;
@@ -57,7 +63,7 @@ public class Battle_MapDataManager : SingleTon<Battle_MapDataManager>
 
             if (BaseEventManager.Instance.OnEvent(BaseEventManager.EVENT_BASE.MAP_LOAD,null)==false)
             {
-                Debug.Log("서순 실패.");
+                Debug.Log("로드 순서 실패.");
             }
         }
         else
