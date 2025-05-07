@@ -63,7 +63,7 @@ public class TestShow_PathFinder
             {
                 foreach (var pixelInfo in cellInfo.Dic_MapPixel)
                 {
-                    cellInfo.ShowPixelController.ShowPixelBlock(pixelInfo.Value, false,Color.green);
+                    cellInfo.ShowPixelController.Refresh_ShowPixel(pixelInfo.Value, false,Color.green);
                 }
             }
             tileInfo.ShowCellController.List_Cur_ShowUnitCell.Clear();

@@ -24,7 +24,7 @@ public class UnitDataManager : SingleTon<UnitDataManager>
             // 유닛의 월드 좌표를 화면 좌표로 변환해 드래그 범위 내에 있는지 검사
             if (selectRect.Contains(mainCamera.WorldToScreenPoint(unit.Value.transform.position)))
             {
-                unit.Value.OnSelect(true);
+               // unit.Value.OnSelect(true);
 
                 if (CameraSelectUnit.Contains(unit.Value) == false)
                 {
@@ -38,7 +38,7 @@ public class UnitDataManager : SingleTon<UnitDataManager>
     public void SelectUnit(BattleBaseUnit unit)
     {
         CameraSelectUnit.Clear();
-        unit.OnSelect(true);
+     //   unit.OnSelect(true);
         CameraSelectUnit.Add(unit);
     }
 
@@ -47,7 +47,7 @@ public class UnitDataManager : SingleTon<UnitDataManager>
     {
         foreach (var unit in CameraSelectUnit)
         {
-            unit.SetMoveState(pos);
+           // unit.SetMoveState(pos);
         }
     }
 
@@ -57,7 +57,7 @@ public class UnitDataManager : SingleTon<UnitDataManager>
         CameraSelectUnit.Clear();
         foreach (var unit in dicUnit)
         {
-            unit.Value.OnSelect(false);
+        //    unit.Value.OnSelect(false);
         }
     }
 

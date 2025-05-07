@@ -10,16 +10,17 @@ using UnityEngine;
 
 public class Battle_Manager : MonoBehaviour
 {
-    //[SerializeField] private NetworkManager Battle_NetWorkManager;
-    [SerializeField] private BattleCameraController cameraController;
-
+    [SerializeField] private BattleCameraController CameraController;
+    [SerializeField] private BattleArmyController ArmyController;
     // 배틀 엔진
     private BattleEngine Engine = new BattleEngine();
+
     // 배틀 UI Manager
 
     void Start()
     {
         Engine.Init();
+        CameraController.Init();
     }
     public void OnDestroy()
     {

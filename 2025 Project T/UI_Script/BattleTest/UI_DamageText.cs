@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class T_ShowPixel : MonoBehaviour
+public class UI_DamageText : MonoBehaviour
 {
-    [SerializeField] public Battle_MapPixel MpaPixel;
+    [SerializeField] Text m_DamageText;
     void Start()
     {
         
@@ -15,4 +16,5 @@ public class T_ShowPixel : MonoBehaviour
     {
         
     }
+    public Text GetText() { return m_DamageText; }
 }

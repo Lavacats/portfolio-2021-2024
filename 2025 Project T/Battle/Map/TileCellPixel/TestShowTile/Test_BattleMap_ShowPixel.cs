@@ -4,10 +4,10 @@ using UnityEngine;
 public class Test_BattleMap_ShowPixel
 {
     public Dictionary<Vector2, T_ShowPixel> DIc_ShowPixel = new Dictionary<Vector2, T_ShowPixel>();
-    public void ADD_Pixel(Vector3 pixelPos,Vector2Int index, Vector2Int cellindex, Transform cellTransform, Battle_MapPixel mapPixel)
+    public void ADD_Pixel(Vector3 pixelPos,Vector2Int index, Vector2Int cellindex, Transform cellTransform, Battle_MapPixel mapPixel,bool isActive,bool isShow)
     {
 #if UNITY_EDITOR
-        if (Battle_MapDataManager.Instance.IsShowSet())
+        if (isActive)
         {
             GameObject floorTile = GameObject.CreatePrimitive(PrimitiveType.Plane);
             Renderer renderer = floorTile.GetComponent<Renderer>();
@@ -16,7 +16,7 @@ public class Test_BattleMap_ShowPixel
             if (renderer != null)
             {
                 renderer.material.color = Color.green;
-                renderer.enabled = mpaData.isShowPixel;
+                renderer.enabled = isShow;
             }
             floorTile.transform.name = "Pixel:" + index.x + "/" + index.y;
 
@@ -29,8 +29,10 @@ public class Test_BattleMap_ShowPixel
         }
 #endif
     }
-    public void ShowPixelBlock(Battle_MapPixel pixel,bool isShow,Color color)
+    public void Refresh_ShowPixel(Battle_MapPixel pixel,bool isShow,Color color)
     {
+        if (pixel == null) return;
+
         if(DIc_ShowPixel.ContainsKey(pixel.PixelPos))
         {
             Renderer renderer = DIc_ShowPixel[pixel.PixelPos].GetComponent<Renderer>();

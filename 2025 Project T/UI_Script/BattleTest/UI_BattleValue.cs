@@ -9,7 +9,7 @@ public class UI_BattleValue : MonoBehaviour
 
     void Start()
     {
-        
+         
     }
 
     // Update is called once per frame

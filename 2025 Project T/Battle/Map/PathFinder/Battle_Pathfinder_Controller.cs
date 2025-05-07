@@ -91,13 +91,16 @@ public class Battle_Pathfinder_Controller : MonoBehaviour
                     // 3. 유닛 소속 Pixel 검색
                     Battle_MapPixel curUnitPixel = unitCell.GetPixel(unitPos);
 
-                    Unit.PrePixel = Unit.CurPixel;
-                    Unit.CurPixel = curUnitPixel;
+                   // Unit.PrePixel = Unit.CurPixel;
+                    //Unit.CurPixel = curUnitPixel;
 
                     // TEST SHOW
                     if (Battle_MapDataManager.Instance.isShowPixel)
                     {
-                        unitCell.ShowPixelController.ShowPixelBlock(Unit.PrePixel, true, Color.red);
+                        if (unitCell != null)
+                        {
+                           // unitCell.ShowPixelController.Refresh_ShowPixel(Unit.PrePixel, true, Color.red);
+                        }
                     }
                 }
             }

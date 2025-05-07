@@ -9,8 +9,17 @@ public class BaseEventManager : SingleTon<BaseEventManager>
     {
         NONE,
         MOUSE_DOWN_RIGHT,
-        MOUSE_DOWN_LEFT,
+        ONSELECT_ARMY,
+        ONSELECT_ARMY_UI,
+        MOUSE_DESELECT_ARMY,
         MAP_LOAD,
+        ON_EVENT_SKILL,
+        AMRY_STATE_SKILL_START,
+        ARMY_STATE_SKILL_END,
+        BUFF_START,
+        BUFF_END,
+        COMBAT_START,
+        
     }
     private Dictionary<EVENT_BASE, List<Action<object>>> dicEventHandler = new Dictionary<EVENT_BASE, List<Action<object>>>();
 

@@ -52,6 +52,7 @@ public class Battle_MapDirector : MonoBehaviour
                 if(parentTransForm!= TileList.transform) ShowTIleController.Set_ShowMapTileParent(tilePos, Dic_MapTile[tileKey]);
             }
         }
+        ArmyDataManager.Instance.MapDirector = this;
     }
 
     #region Get Map Data
@@ -115,6 +116,18 @@ public class Battle_MapDirector : MonoBehaviour
         foreach (var tile in Dic_MapTile)
         {
             foreach (var pixel in tile.Value.Get_ALL_BattleMapPixel())
+            {
+                result[pixel.Key] = pixel.Value;
+            }
+        }
+        return result;
+    }
+    public SerializableDictionary<Vector2, Battle_MapPixel> Get_ALL_BattleMapPixel_Index()
+    {
+        SerializableDictionary<Vector2, Battle_MapPixel> result = new SerializableDictionary<Vector2, Battle_MapPixel>();
+        foreach (var tile in Dic_MapTile)
+        {
+            foreach (var pixel in tile.Value.Get_ALL_BattleMapPixel_Index())
             {
                 result[pixel.Key] = pixel.Value;
             }

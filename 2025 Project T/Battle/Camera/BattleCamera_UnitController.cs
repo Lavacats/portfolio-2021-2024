@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class BattleCamera_UnitController 
@@ -52,25 +53,13 @@ public class BattleCamera_UnitController
         DrawDragRectangle();
         dragRectangle.gameObject.SetActive(false);
         RefreshSelectRect();
-        UnitDataManager.Instance.SelectUnit_Camera(selectionRect, mainCamara);
     }
     public void OnMouseRightDown(Vector3 mousePos)
     {
-        RaycastHit hit;
+        //RaycastHit hit;
         Ray ray = mainCamara.ScreenPointToRay(Input.mousePosition); // 마우스 위치에서 레이 생성
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) // 레이캐스트를 쏴서 충돌 체크
-        {
-            GameObject hitObject = hit.collider.gameObject;
-            MeshCollider meshCollider = hitObject.GetComponent<MeshCollider>(); // 특정 스크립트를 검사 (예: MyScript)
-
-            if (meshCollider != null)
-            {
-                BaseEventManager.Instance.OnEvent(BaseEventManager.EVENT_BASE.MOUSE_DOWN_RIGHT, hit.point); // MouseMoveDown 관련 이벤트 처리
-
-                UnitDataManager.Instance.UnitMoveOrder(hit.point);
-            }
-        }
+        BaseEventManager.Instance.OnEvent(BaseEventManager.EVENT_BASE.MOUSE_DOWN_RIGHT, ray); // MouseMoveDown 관련 이벤트 처리
     }
     public void OnMouseRightUp(Vector3 mousePos)
     {
@@ -83,19 +72,19 @@ public class BattleCamera_UnitController
     private void OnPointLeftDown(Vector3 mousePos)
     {
         //선택 유닛 해제
-        UnitDataManager.Instance.AllDeSelectUnit();
         RaycastHit hit;
         Ray ray = mainCamara.ScreenPointToRay(Input.mousePosition); // 마우스 위치에서 레이 생성
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) // 레이캐스트를 쏴서 충돌 체크
         {
             GameObject hitObject = hit.collider.gameObject;
-            BattleBaseUnit battleUnit = hitObject.GetComponent<BattleBaseUnit>(); // 특정 스크립트를 검사 (예: MyScript)
+            BattleArmyCell battleArmyCell = hitObject.GetComponent<BattleArmyCell>(); // 특정 스크립트를 검사 (예: MyScript)
 
-            if (battleUnit != null)
+            BaseEventManager.Instance.OnEvent(BaseEventManager.EVENT_BASE.MOUSE_DESELECT_ARMY, null);
+
+            if (battleArmyCell != null)
             {
-                battleUnit.OnSelect(true);
-                UnitDataManager.Instance.SelectUnit(battleUnit);
+                BaseEventManager.Instance.OnEvent(BaseEventManager.EVENT_BASE.ONSELECT_ARMY, battleArmyCell.GetArmyIdx());
             }
             else
             {

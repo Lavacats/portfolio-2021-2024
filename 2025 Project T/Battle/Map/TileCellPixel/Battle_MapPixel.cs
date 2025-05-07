@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+
 
 public enum E_PixelState
 {
@@ -11,7 +11,7 @@ public enum E_PixelState
     MOVE_DISENABLE_TYPE_1,  // 2 : 지형 장애물 
     MOVE_DISENABLE_TYPE_2,  // 3 : 장애물( 더미, 유닛 )
 }
-
+[System.Serializable]
 public class Battle_MapPixel 
 {
     public Vector2Int  PixelIndex;
@@ -23,4 +23,5 @@ public class Battle_MapPixel
         PixelIndex = pixelIndex; ;
         PixelPos = pixelPos;
     }
+    public Vector3 GetPixelPos() { return new Vector3(PixelPos.x, 0, PixelPos.y); }
 }

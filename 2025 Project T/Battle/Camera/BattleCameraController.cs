@@ -13,17 +13,43 @@ public class BattleCameraController : BaseCameraController
 {
     private BattleCamera_UnitController CameraUnitController = new BattleCamera_UnitController();
     private BattleCamera_CameraMove CameraMove = new BattleCamera_CameraMove();
+
+    [SerializeField] Camera CharacterCamera;
+
     private void Start()
     {
         CameraUnitController.Apply(mainCamera); // 유닛검사에서 쓰이기 위한 메인카메라 
         Battle_MapDataManager.Instance.MapCamaera = mainCamera;
+        BattleEngine_Manager.Instance.CameraController = this;
     }
     protected override void Update()
     {
        base.Update();
         CameraMove.Update(mainCamera);  // 카메라 이동 갱신
     }
+    public void Init()
+    {
+        BaseEventManager.Instance.AddEvent(BaseEventManager.EVENT_BASE.AMRY_STATE_SKILL_START, OnEvent_SkillEvent);
+        BaseEventManager.Instance.AddEvent(BaseEventManager.EVENT_BASE.ARMY_STATE_SKILL_END, OnEvent_SkillEvent_End);
+    }
+    public void OnDestroy()
+    {
+        if (BaseEventManager.Instance != null) BaseEventManager.Instance.AddEvent(BaseEventManager.EVENT_BASE.AMRY_STATE_SKILL_START, OnEvent_SkillEvent);
+        if (BaseEventManager.Instance != null) BaseEventManager.Instance.AddEvent(BaseEventManager.EVENT_BASE.ARMY_STATE_SKILL_END, OnEvent_SkillEvent_End);
+    }
+    private void OnEvent_SkillEvent(object value)
+    {
+        if (value == null) return;
+        CharacterCamera.transform.position=mainCamera.transform.position; 
+        CharacterCamera.enabled = true;
 
+    }
+    private void OnEvent_SkillEvent_End(object value)
+    {
+        if (value == null) return;
+
+        CharacterCamera.enabled = false;
+    }
     public override void OnMouseLeftDown()
     {
         base.OnMouseLeftDown();
@@ -62,5 +88,5 @@ public class BattleCameraController : BaseCameraController
         CameraUnitController.OnMouseRightUp(Input.mousePosition);
     }
 
-
+    public Camera GetMainCamera() { return mainCamera; }
 }

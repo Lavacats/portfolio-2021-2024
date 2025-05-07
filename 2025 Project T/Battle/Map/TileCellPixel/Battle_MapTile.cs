@@ -75,5 +75,17 @@ public class Battle_MapTile
         }
         return result; 
     }
+    public Dictionary<Vector2Int, Battle_MapPixel> Get_ALL_BattleMapPixel_Index()
+    {
+        Dictionary<Vector2Int, Battle_MapPixel> result = new Dictionary<Vector2Int, Battle_MapPixel>();
+        foreach (var cell in Dic_MapCell)
+        {
+            foreach (var pixel in cell.Value.Dic_MapPixel_Index)
+            {
+                result[pixel.Value.PixelIndex] = pixel.Value;
+            }
 
+        }
+        return result;
+    }
 }

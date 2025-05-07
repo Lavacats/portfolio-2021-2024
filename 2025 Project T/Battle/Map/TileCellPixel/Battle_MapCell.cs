@@ -9,6 +9,7 @@ public class Battle_MapCell
     public Vector2 CellPos;
     public Test_BattleMap_ShowPixel ShowPixelController = new Test_BattleMap_ShowPixel();
     public Dictionary<Vector2, Battle_MapPixel> Dic_MapPixel= new Dictionary<Vector2, Battle_MapPixel>();
+    public Dictionary<Vector2Int, Battle_MapPixel> Dic_MapPixel_Index = new Dictionary<Vector2Int, Battle_MapPixel>();
 
     public Battle_MapCell(Vector2Int index,  Vector2 pos, Transform map)
     {
@@ -28,7 +29,7 @@ public class Battle_MapCell
 
                 Battle_MapPixel mapPixel = new Battle_MapPixel(pixelIndex, pixelPos); 
 
-                ShowPixelController.ADD_Pixel(pixelPos3, pixelIndex, CellIndex, map, mapPixel);
+                ShowPixelController.ADD_Pixel(pixelPos3, pixelIndex, CellIndex, map, mapPixel, Battle_MapDataManager.Instance.IsShowSet(), Battle_MapDataManager.Instance.IsShowSet());
                 if(ShowPixelController.DIc_ShowPixel.ContainsKey(new Vector2(pixelPos3.x, pixelPos3.z)))
                 {
                     mapPixel.ShowPixel = ShowPixelController.DIc_ShowPixel[new Vector2(pixelPos3.x, pixelPos3.z)];
@@ -36,6 +37,7 @@ public class Battle_MapCell
          
 
                 Dic_MapPixel[pixelPos] = mapPixel;
+                Dic_MapPixel_Index[pixelIndex] = mapPixel;
             }
         }
     }
